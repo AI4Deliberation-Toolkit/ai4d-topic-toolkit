@@ -1,0 +1,63 @@
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Python build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+build/
+dist/
+
+# Virtual environments (1.5 GB on host; would bloat build context)
+venv/
+.venv/
+env/
+ENV/
+
+# Pipenv lock
+Pipfile.lock
+
+# Test / coverage artifacts
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.cache/
+
+# Django dev artifacts
+db.sqlite3
+db.sqlite3-journal
+local_settings.py
+staticfiles/
+media/
+
+# Env files (image must not bake secrets; staging mounts .env at runtime)
+.env
+.env.*
+
+# Editor / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Project-local docs and data (never shipped in the image)
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+*.local.md
+README.md
+CONFIGURATION.md
+DECISIONS.md
+docs/
+resources/
+
+# Docker-side artifacts
+docker-compose.override.yml

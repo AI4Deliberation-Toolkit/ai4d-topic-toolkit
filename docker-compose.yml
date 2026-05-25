@@ -1,0 +1,38 @@
+services:
+  web:
+    container_name: ai4d-topic-toolkit
+    build:
+      context: .
+      dockerfile: ./docker/web/Dockerfile
+    command: gunicorn -w 4 -b 0.0.0.0:8000 ai4d_topic_toolkit.wsgi:application --timeout 300
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/.venv
+      - static_volume:/usr/src/app/staticfiles/
+      - hf_cache:/root/.cache/huggingface
+    environment:
+      DJANGO_SETTINGS_MODULE: ai4d_topic_toolkit.settings.staging
+      SECRET_KEY: local-dev-only-secret-not-for-prod
+      POSTGRES_USER: toolkit
+      POSTGRES_PASSWORD: toolkit
+      POSTGRES_DB: toolkit
+      POSTGRES_PORT: "5432"
+    depends_on:
+      - db
+
+  db:
+    container_name: ai4d-topic-toolkit-db
+    image: postgres:17.6
+    environment:
+      POSTGRES_USER: toolkit
+      POSTGRES_PASSWORD: toolkit
+      POSTGRES_DB: toolkit
+    volumes:
+      - db_volume:/var/lib/postgresql/data/
+
+volumes:
+  static_volume:
+  db_volume:
+  hf_cache:
