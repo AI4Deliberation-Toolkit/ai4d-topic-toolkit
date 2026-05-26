@@ -64,7 +64,6 @@ htmlcov/
 CLAUDE.md
 CLAUDE.local.md
 *.local.md
-README.md
 CONFIGURATION.md
 DECISIONS.md
 docs/
