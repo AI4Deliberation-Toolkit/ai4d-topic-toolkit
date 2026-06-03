@@ -20,6 +20,10 @@ POSTGRES_USER = config('POSTGRES_USER')
 POSTGRES_PASSWORD = config('POSTGRES_PASSWORD')
 POSTGRES_PORT = config('POSTGRES_PORT', default='5432')
 POSTGRES_DB = config('POSTGRES_DB', default='postgres')
+# Defaults to 'db' (the compose service name) so the server deployment is
+# unchanged. The single-container pod image sets POSTGRES_HOST=127.0.0.1 to
+# reach its bundled Postgres.
+POSTGRES_HOST = config('POSTGRES_HOST', default='db')
 
 DATABASES = {
     'default': {
@@ -27,7 +31,7 @@ DATABASES = {
         'NAME': POSTGRES_DB,
         'USER': POSTGRES_USER,
         'PASSWORD': POSTGRES_PASSWORD,
-        'HOST': 'db',
+        'HOST': POSTGRES_HOST,
         'PORT': POSTGRES_PORT,
     }
 }
